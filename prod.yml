@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app:  producttservice
+  name:  producttservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  producttservice
+  strategy: {}
+  template:
+    metadata:
+
+      labels:
+        app:  producttservice
+    spec:
+      containers:
+        - env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+          image: arwamili/products:latest
+          name:  producttservice
+          resources: {}
+      restartPolicy: Always
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: producttservice
+  name: producttservice
+spec:
+  type: NodePort
+  ports:
+    - port: 8071
+      targetPort: 8071
+      nodePort: 30302
+  selector:
+    app:  producttservice
+status:
+  loadBalancer: {}

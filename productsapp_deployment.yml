@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name:  productsservice
+    labels:
+        app:  productsservice
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: productsservice
+    template:
+        metadata:
+            name: productsservice
+            labels:
+                app:  productsservice
+        spec:
+            containers:
+                - name:  productsservice
+                  image: arwamili/products:latest

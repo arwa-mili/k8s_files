@@ -1,0 +1,11 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: pod1
+spec: 
+  containers: 
+    - name: db
+      image: redis
+    - name: web
+      image: httpd
+
